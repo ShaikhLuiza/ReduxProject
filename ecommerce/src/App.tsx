@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { showDetails } from "./productSlice";
 import { addToCart, removeFromCart } from "./cartSlice";
@@ -37,6 +38,7 @@ interface Product {
 
 function App() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -599,7 +601,14 @@ function App() {
 
                 </div>
 
-                <Button className="mt-4 w-full">
+                {/* Proceed to Checkout */}
+                <Button
+                  className="mt-4 w-full"
+                  onClick={() => {
+                    setIsCartOpen(false);
+                    navigate("/checkout");
+                  }}
+                >
                   Proceed to Checkout
                 </Button>
 
